@@ -18,6 +18,9 @@ namespace BambiBotNET
 
 		public static string[] Colors = { "Red", "Blue", "Green", "Yellow", "Black", "White", "Orange", "Purple", "Gray", "Rainbow" };
 
+		public static string[] Objects = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Config", "english-nouns.txt"));
+		public static string[] Adjectives = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "Config", "english-adjectives.txt"));
+
 
 		public override async Task<Task> Run(List<Parameter> Params, SocketUserMessage userMessage)
 		{
@@ -44,6 +47,10 @@ namespace BambiBotNET
 
 
 			funny += "\nHat:" + Colors[rng.Next(0, Colors.Length - 1)] + "\nShirt:" + Colors[rng.Next(0, Colors.Length - 1)] + "\nPants:" + Colors[rng.Next(0, Colors.Length - 1)];
+
+			funny += "\nDescriptive Adjective:" + Adjectives[rng.Next(0, Adjectives.Length - 1)];
+
+			funny += "\nFavorite Object:" + Objects[rng.Next(0, Objects.Length - 1)];
 
 
 			await userMessage.Channel.SendMessageAsync(funny + "\n```");
