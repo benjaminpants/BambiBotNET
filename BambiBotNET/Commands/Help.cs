@@ -22,7 +22,7 @@ namespace BambiBotNET
 			
 
 
-			await userMessage.Channel.SendMessageAsync("```\nCommands\n\">markovcello\" - generates a marcello quote using a markov chain. Add \"smart\" to make it produce more intellgiable output at risk of copying quotes directly\n\">bambsona\" - Randomly generates a \"Bambisona\" with a description\n\">opinion\" - Get marcellos REAL opinion on you (not clickbait)\n\">realwiki\" - uses a markov chain to make a fake wiki entry\n\">email\" - generates an email for the pinged person```");
+			await userMessage.Channel.SendMessageAsync("```\nCommands\n\">markovcello\" - generates a marcello quote using a markov chain. Add \"smart\" to make it produce more intellgiable output at risk of copying quotes directly\n\">bambsona\" - Randomly generates a \"Bambisona\" with a description\n\">opinion\" - Get marcellos REAL opinion on you (not clickbait)\n\">wikireal\" - uses a markov chain to make a fake wiki entry\n\">email\" - generates an email for the pinged person```");
 			return Task.CompletedTask;
 		}
 	}
