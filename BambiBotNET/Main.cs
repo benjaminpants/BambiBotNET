@@ -101,6 +101,9 @@ namespace BambiBotNET
 
 			var token = File.ReadAllText(Path.Combine(Environment.CurrentDirectory,"Config","token.txt"));
 
+
+			//THE BELOW CODE IS A FUCKING HELLHOLE AND WILL BE REPLACED SOON
+
 			Command Mark = new MarkovCello();
 			await Mark.Init();
 
