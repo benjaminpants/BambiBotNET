@@ -1,0 +1,123 @@
+﻿using Discord;
+using Discord.WebSocket;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
+namespace BambiBotNET
+{
+	public class Program
+	{
+		public static Program Instance;
+
+		public Program()
+		{
+			Program.Instance = this;
+		}
+
+		public async Task<Task> SendMessageWithFilters(ISocketMessageChannel channel, string str)
+		{
+			if (str.Contains("@everyone") || str.Contains("@here"))
+			{
+				return channel.SendMessageAsync("Message contained a ping.");
+			}
+			return channel.SendMessageAsync(str);
+		}
+
+
+
+		public static Task Main(string[] args) => new Program().MainAsync();
+
+		public static Dictionary<string, Command> Commands = new Dictionary<string, Command>();
+
+
+
+		private DiscordSocketClient _client;
+
+		private Task Log(LogMessage msg)
+		{
+			Console.WriteLine(msg.ToString());
+			return Task.CompletedTask;
+		}
+
+
+
+		private async Task<Task> MessageSent(SocketMessage message)
+		{
+			if (!(message is SocketUserMessage userMessage)) return Task.CompletedTask;
+			if (userMessage.Source != MessageSource.User) return Task.CompletedTask;
+			
+			if (userMessage.Content.StartsWith(">"))
+			{
+				string[] command = userMessage.Content.Substring(1).Split(" ");
+
+				Console.WriteLine(userMessage.Content);
+
+				List<Parameter> Params = new List<Parameter>();
+
+				for (int i = 1; i < command.Length; i++)
+				{
+					if (int.TryParse(command[i], out int integer))
+					{
+						Params.Add(new Parameter(integer));
+					}
+					else if (float.TryParse(command[i], out float floating_point))
+					{
+						Params.Add(new Parameter(floating_point));
+					}
+					else if (command[i].StartsWith("<@!"))//<@!921989230983536700>
+					{
+						if (ulong.TryParse(command[i].Substring(3, command[i].Length - 4), out ulong id))
+						{
+							SocketUser user = _client.GetUser(id);
+							Params.Add(new Parameter(user));
+						}
+						else
+						{
+							Params.Add(new Parameter());
+						}
+					}
+					else
+					{
+						Params.Add(new Parameter(command[i]));
+					}
+				}
+				if (Commands.TryGetValue(command[0],out Command cmd))
+				{
+					return cmd.Run(Params,userMessage);
+				}
+			}
+			return Task.CompletedTask;
+		}
+
+		public async Task MainAsync()
+		{
+			_client = new DiscordSocketClient();
+
+			_client.Log += Log;
+
+			_client.MessageReceived += MessageSent;
+
+			var token = File.ReadAllText(Path.Combine(Environment.CurrentDirectory,"Config","token.txt"));
+
+			Command Mark = new MarkovCello();
+			await Mark.Init();
+
+			Commands.Add("markovcello", Mark);
+
+			Commands.Add("help", new HelpCommand());
+
+			Commands.Add("bambsona", new Bambsonda());
+
+			Commands.Add("opinion", new OpinionCommand());
+
+			await _client.LoginAsync(TokenType.Bot, token);
+			await _client.StartAsync();
+
+			await Task.Delay(-1);
+
+
+		}
+	}
+}
