@@ -35,6 +35,14 @@ namespace BambiBotNET
 
 			funny += "MB";
 
+			if (Params.Count != 0)
+			{
+				if (Params[0].Type == ParamaterType.User)
+				{
+					rng = new Random((int)Params[0].User.Id);
+				}
+			}
+
 
 			if (rng.Next(0, 2) == 0)
 			{
