@@ -116,7 +116,9 @@ namespace BambiBotNET
 
 			Commands.Add("help", new HelpCommand());
 
-			Commands.Add("bambsona", new Bambsonda());
+			Commands.Add("bambsona", new Bambsona());
+
+			Commands.Add("email", new EmailAddress());
 
 			Commands.Add("opinion", new OpinionCommand());
 

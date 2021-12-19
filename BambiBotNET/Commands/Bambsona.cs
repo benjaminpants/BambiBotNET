@@ -1,16 +1,12 @@
-﻿using Discord;
-using Discord.WebSocket;
+﻿using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using System.Linq;
-using MarkovSharp;
-using MarkovSharp.TokenisationStrategies;
 
 namespace BambiBotNET
 {
-	public class Bambsonda : Command
+	public class Bambsona : Command
 	{
 		public static char[] Constants = { 'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z' };
 
