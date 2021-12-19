@@ -107,7 +107,12 @@ namespace BambiBotNET
 			Command Mark = new MarkovCello();
 			await Mark.Init();
 
+			Command Mark2 = new RealWiki();
+			await Mark2.Init();
+
 			Commands.Add("markovcello", Mark);
+
+			Commands.Add("wikireal", Mark2);
 
 			Commands.Add("help", new HelpCommand());
 

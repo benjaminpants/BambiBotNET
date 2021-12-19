@@ -39,7 +39,10 @@ namespace BambiBotNET
 			{
 				if (Params[0].Type == ParamaterType.User)
 				{
-					rng = new Random((int)Params[0].User.Id);
+					if (Params[0].User != null)
+					{
+						rng = new Random((int)Params[0].User.Id);
+					}
 				}
 			}
 
