@@ -105,6 +105,12 @@ namespace BambiBotNET
 
 			_client.MessageReceived += MessageSent;
 
+			if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "Config", "token.txt")))
+			{
+				Console.WriteLine("token.txt not found, this is probably your first time booting the bot up.");
+				return;
+			}
+
 			var token = File.ReadAllText(Path.Combine(Environment.CurrentDirectory,"Config","token.txt"));
 
 
