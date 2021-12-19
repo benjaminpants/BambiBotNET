@@ -23,13 +23,6 @@ namespace BambiBotNET
 
 			Random rng = new Random();
 
-			string funny = "```\n";
-
-			funny += Constants[rng.Next(0, Constants.Length - 1)];
-
-			funny += Vowels[rng.Next(0, Vowels.Length - 1)];
-
-			funny += "MB";
 
 			if (Params.Count != 0)
 			{
@@ -41,6 +34,16 @@ namespace BambiBotNET
 					}
 				}
 			}
+
+			string funny = "```\n";
+
+			funny += Constants[rng.Next(0, Constants.Length - 1)];
+
+			funny += Vowels[rng.Next(0, Vowels.Length - 1)];
+
+			funny += "MB";
+
+			
 
 
 			if (rng.Next(0, 2) == 0)

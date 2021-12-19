@@ -13,9 +13,9 @@ namespace BambiBotNET
 	public class EmailAddress : Command
 	{
 
-		public static string[] EmailAdd = { "iscool", "loveskids", "homosex", "isawesomecringe", "lovesfortnite", "hatesminecraft", "lovesminecraft", "hatesfortnite" };
+		public static string[] EmailAdd = { "iscool", "loveskids", "homosex", "isawesomecringe", "loveskanye", "bruh", "2008", "basics", "lovesreddit333", "wasnottheimpostor" };
 
-		public static string[] Websites = { "gmail.com", "pornhub.com", "baldisbasics.net", "yahoo.com", "areyoucordingmygame.net", "awesomesauce.com", "sugoma.gov" };
+		public static string[] Websites = { "gmail.com", "pornhub.com", "baldisbasics.net", "yahoo.com", "areyoucordingmygame.net", "awesomesauce.com", "sugoma.gov", "aol.com", "gay.net" };
 
 		public override async Task<Task> Run(List<Parameter> Params, SocketUserMessage userMessage)
 		{

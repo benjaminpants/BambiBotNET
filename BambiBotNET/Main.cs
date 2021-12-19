@@ -48,6 +48,12 @@ namespace BambiBotNET
 			if (!(message is SocketUserMessage userMessage)) return Task.CompletedTask;
 			if (userMessage.Source != MessageSource.User) return Task.CompletedTask;
 			
+			if (userMessage.Channel.Name != "bambi-bot")
+			{
+				return Task.CompletedTask;
+			}
+
+
 			if (userMessage.Content.StartsWith(">"))
 			{
 				string[] command = userMessage.Content.Substring(1).Split(" ");
