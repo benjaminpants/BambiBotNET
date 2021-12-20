@@ -10,68 +10,21 @@ using MarkovSharp.TokenisationStrategies;
 
 namespace BambiBotNET
 {
-	public class MarkovCello : Command
+	public class MarkovCello : MarkovCommand
 	{
-		private StringMarkov Level1Markov;
-
-		private StringMarkov Level2Markov;
+		
 
 
 		public override async Task<Task> Init()
 		{
-			string marcellokov = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "Config", "MarcelloQuotes.txt"));
-
-			Level1Markov = new StringMarkov(1);
-
-			Level2Markov = new StringMarkov(2);
-
-			Level1Markov.Learn(marcellokov);
-
-			Level2Markov.Learn(marcellokov);
-
-			Level1Markov.EnsureUniqueWalk = true;
-
-			Level2Markov.EnsureUniqueWalk = true;
-
+			FileToLook = "MarcelloQuotes.txt";
 
 			return base.Init();
 		}
 
 		public override async Task<Task> Run(List<Parameter> Params, SocketUserMessage userMessage)
 		{
-
-
-			Random rng = new Random();
-
-
-			string current = "";
-
-			bool smart = false;
-
-			if (Params.Count != 0)
-			{
-				if (Params[0].String == "smart")
-				{
-					smart = true;
-				}
-				
-			}
-
-
-
-			if (!smart)
-			{
-				current = Level1Markov.Walk(1).RandomElementUsing(rng).Split('\n').RandomElementUsing(rng);
-			}
-			else
-			{
-				current = Level2Markov.Walk(1).RandomElementUsing(rng).Split('\n').RandomElementUsing(rng);
-			}
-
-
-
-			await userMessage.Channel.SendMessageAsync(current);
-			return Task.CompletedTask;
+			return base.Run(Params,userMessage);
 		}
 	}
 }

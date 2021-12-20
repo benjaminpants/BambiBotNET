@@ -10,13 +10,13 @@ using MarkovSharp.TokenisationStrategies;
 
 namespace BambiBotNET
 {
-	public class MarkovCommand : Command
+	public class DialogueMarkov : Command
 	{
 		private StringMarkov Level1Markov;
 
 		private StringMarkov Level2Markov;
 
-		protected string FileToLook;
+		protected string FileToLook = "dialogue.txt";
 
 		protected bool DefaultSmart = false;
 
@@ -67,28 +67,41 @@ namespace BambiBotNET
 			{
 				if (DefaultSmart)
 				{
-					current = Level2Markov.Walk(1).RandomElementUsing(rng).Split('\n').RandomElementUsing(rng);
+					current = Level2Markov.Walk(1).RandomElementUsing(rng);
 				}
 				else
 				{
-					current = Level1Markov.Walk(1).RandomElementUsing(rng).Split('\n').RandomElementUsing(rng);
+					current = Level1Markov.Walk(1).RandomElementUsing(rng);
 				}
 			}
 			else
 			{
 				if (DefaultSmart)
 				{
-					current = Level1Markov.Walk(1).RandomElementUsing(rng).Split('\n').RandomElementUsing(rng);
+					current = Level1Markov.Walk(1).RandomElementUsing(rng);
 				}
 				else
 				{
-					current = Level2Markov.Walk(1).RandomElementUsing(rng).Split('\n').RandomElementUsing(rng);
+					current = Level2Markov.Walk(1).RandomElementUsing(rng);
 				}
+			}
+
+			string[] splits = current.Split('\n');
+
+			string final = "";
+
+			for (int i = 0; i < Math.Clamp(splits.Length,1,8); i++)
+			{
+				if (splits[i] == "")
+				{
+					break;
+				}
+				final += splits[i];
 			}
 
 
 
-			await userMessage.Channel.SendMessageAsync(current);
+			await userMessage.Channel.SendMessageAsync("```\n" + final + "```");
 			return Task.CompletedTask;
 		}
 	}

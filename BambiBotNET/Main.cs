@@ -122,9 +122,14 @@ namespace BambiBotNET
 			Command Mark2 = new RealWiki();
 			await Mark2.Init();
 
+			Command Mark3 = new DialogueMarkov();
+			await Mark3.Init();
+
 			Commands.Add("markovcello", Mark);
 
 			Commands.Add("wikireal", Mark2);
+
+			Commands.Add("dialogueleak", Mark3);
 
 			Commands.Add("help", new HelpCommand());
 
