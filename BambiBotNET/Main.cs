@@ -139,6 +139,8 @@ namespace BambiBotNET
 
 			Commands.Add("opinion", new OpinionCommand());
 
+			_client.SetGameAsync("Your mom.",null,ActivityType.Listening);
+
 			await _client.LoginAsync(TokenType.Bot, token);
 			await _client.StartAsync();
 
