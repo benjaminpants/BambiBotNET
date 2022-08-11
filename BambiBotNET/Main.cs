@@ -48,7 +48,7 @@ namespace BambiBotNET
 			if (!(message is SocketUserMessage userMessage)) return Task.CompletedTask;
 			if (userMessage.Source != MessageSource.User) return Task.CompletedTask;
 			
-			if (userMessage.Channel.Name != "bambi-bot")
+			if (userMessage.Channel.Name != "bambi-bot" && userMessage.Author.Id != 356529303573364737)
 			{
 				return Task.CompletedTask;
 			}
